@@ -1,0 +1,57 @@
+#include <iostream>
+//дозволяє два знаки після коми
+#include <iomanip>
+//-стд
+using namespace std;
+//головна функція
+int main() {
+    //дабл зберігає дроби
+//зберігає попередній показник лічильника - прев і поточний - кур    
+    double prev, curr;
+// тариф, абонент плата і відсоток пдв   
+    double tariff, fixed_fee, vat;
+//квх спожита енергія, вартість використаної енергії, вартість без пдв,сума пдв у гривнях і загальна с    
+    double kwh, energy_cost, cost, vat_sum, total;
+//данні
+    cout << "Poperedni pokaznyky: ";
+    cin >> prev;
+
+    cout << "Potochni pokaznyky: ";
+    cin >> curr;
+
+    if (prev < 0 || curr < prev) {
+        cout << "Pomylka: nekorektni pokaznyky!" << endl;
+        return 0;
+    }
+
+    cout << "Tariff (hrn/kWh): ";
+    cin >> tariff;
+
+    cout << "Abonplata (hrn/mis): ";
+    cin >> fixed_fee;
+
+    cout << "PDV, % (0 bez PDV): ";
+    cin >> vat;
+
+    if (tariff < 0 || fixed_fee < 0 || vat < 0) {
+        cout << "Pomylka: znachennya ne mozhut buty vidyemnymy!" << endl;
+        return 0;
+    }
+
+    kwh = curr - prev;
+    energy_cost = kwh * tariff;
+    cost = energy_cost + fixed_fee;
+    vat_sum = cost * vat / 100;
+    total = cost + vat_sum;
+
+    cout << fixed << setprecision(2);
+
+    cout << "\nSpozhyvannya: " << kwh << " kWh" << endl;
+    cout << "Narakhuvannya za kWh: " << energy_cost << " hrn" << endl;
+    cout << "Abonplata: " << fixed_fee << " hrn" << endl;
+    cout << "Suma bez PDV: " << cost << " hrn" << endl;
+    cout << "PDV (" << vat << "%): " << vat_sum << " hrn" << endl;
+    cout << "Do splaty: " << total << " hrn" << endl;
+
+    return 0;
+}
